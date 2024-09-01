@@ -65,10 +65,45 @@
             font-family: 'Open Sans', sans-serif;
             color: white;
         }
-      
+        #loading {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: #000; /* Cor de fundo enquanto carrega */
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999; /* Para garantir que está acima de todo o conteúdo */
+            color: white;
+            font-family: 'Chivo Mono', sans-serif;
+            font-size: 24px;
+            text-align: center;
+        }
+        
+        .spinner {
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #ffffff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
     </style>
 </head>
 <body>
+    <div id="loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+    
     <div id="info">
         <h2>SOBRE NÓS</h2>
         <p>SciConnect é um projeto que une alunos com vontade de realizar uma iniciação científica com professores capacitados. <br> Nossa missão é facilitar o encontro de mentes com especialistas que podem guiar novos caminhos na pesquisa científica.</p>
@@ -177,6 +212,17 @@
             renderer.render(scene, camera);
             cssRenderer.render(scene, camera);
         }
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loading');
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.transition = 'opacity 0.5s ease';
+        
+            // Espera a transição de fade-out terminar antes de remover o elemento do DOM
+            setTimeout(function() {
+                loadingScreen.style.display = 'none';
+            }, 500); // Corresponde ao tempo da transição
+        });
+        
     </script>
 </body>
 </html>
