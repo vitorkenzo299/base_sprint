@@ -4,84 +4,60 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
-     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
     <style>
-        body { margin: 0; overflow: hidden; }
-        #info {
+        body { 
+            margin: 0; 
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+        }
+        #scene-container {
+            width: 100%;
+            height: 100vh;
+        }
+        #content-wrapper {
+            position: relative;
+        }
+        #scrollable-content {
+            background-color: white;
+            padding: 50px;
+        }
+        #info, #info-left {
             position: absolute;
-            top: 100px;
-            left: 20px;
+            top: 150px;
             width: 300px;
             padding: 15px;
-            background-color: #000000;
+            background-color: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
-            
-            
             font-size: 20px;
-            color: #333;
-            z-index: 1;
+            color: white;
+            z-index: 3;
         }
-        #info h2 {
+        #info { left: 20px; }
+        #info-left { right: 20px; }
+        #info h2, #info-left h2 {
             font-family: 'Raleway', sans-serif;
             font-size: 18px;
             margin-bottom: 10px;
             color: red;
-        }
-        #info p {
-            margin: 0;
-            line-height: 1.6;
-            
-            text-align: justify;
-            color: white;
-            font-family: 'Open Sans', sans-serif;
-        }
-        #info-left {
-            position: absolute;
-            top: 100px;
-            right: 20px;
-            width: 300px;
-            padding: 15px;
-            background-color: rgba(0xf0f0f0);
-            border-radius: 10px;
-            
-            font-family: font-family: 'Roboto Mono', monospace;
-            font-size: 20px;
-            color: #333;
-            z-index: 1;
-        }
-        #info-left h2 {
-            font-size: 18px;
-            font-family: 'Raleway', sans-serif;
-            margin-bottom: 10px;
-            color: red;
-        }
-        #info-left p {
-            margin: 0;
-            
-            line-height: 1.6;
-            text-align: justify;
-            font-family: 'Open Sans', sans-serif;
-            color: white;
         }
         #loading {
             position: fixed;
             width: 100%;
             height: 100%;
-            background: #000; /* Cor de fundo enquanto carrega */
+            background: #000;
             top: 0;
             left: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 9999; /* Para garantir que está acima de todo o conteúdo */
+            z-index: 9999;
             color: white;
             font-family: 'Chivo Mono', sans-serif;
             font-size: 24px;
             text-align: center;
         }
-        
         .spinner {
             border: 8px solid rgba(255, 255, 255, 0.1);
             border-left-color: #ffffff;
@@ -90,12 +66,10 @@
             height: 50px;
             animation: spin 1s linear infinite;
         }
-        
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-        
     </style>
 </head>
 <body>
@@ -103,7 +77,6 @@
         <div class="spinner"></div>
         <p>Loading...</p>
     </div>
-    
     <div id="info">
         <h2>SOBRE NÓS</h2>
         <p>SciConnect é um projeto que une alunos com vontade de realizar uma iniciação científica com professores capacitados. <br> Nossa missão é facilitar o encontro de mentes com especialistas que podem guiar novos caminhos na pesquisa científica.</p>
@@ -112,7 +85,19 @@
         <h2>UMA SÉRIE DE INOVAÇÕES PARA AJUDAR VOCÊ</h2>
         <p>O SciConnect conta com um chatbot integrado, que possui capacidade de ajudar você com eventuais dúvidas sobre o processo de aplicação de uma iniciação científica.<br> Além disso, contamos com uma extensa base de dados que une seu tema de pesquisa com os professores mais capacitados da área.</p>
     </div>
-    
+    <div id="scene-container"></div>
+   
+    <div id="content-wrapper">
+        
+        <div id="scrollable-content">
+            <h2>NOSSOS PROJETOS</h2>
+            <p>BLA BLA BLA</p>
+            
+            <p>x</p>
+            <p>yas</p>
+           
+        </div>
+    </div>
     
     <script type="importmap">
         {
@@ -139,23 +124,22 @@
             camera.position.set(200, 200, 600);
 
             scene = new THREE.Scene();
-            scene.background = new THREE.Color(0);
+            scene.background = new THREE.Color(0x000000); // Ensure black background
 
             pivot = new THREE.Object3D();
             scene.add(pivot);
 
-            const material = new THREE.MeshBasicMaterial({
-                color: 0x000000,
+            const lineMaterial = new THREE.LineBasicMaterial({
+                color: 0xffffff,
                 transparent: true,
-                opacity: 0.2,
-                side: THREE.DoubleSide,
+                opacity: 0.5
             });
 
             for (let i = 0; i < 15; i++) {
                 const element = document.createElement('div');
                 element.style.width = '100px';
                 element.style.height = '100px';
-                element.style.opacity = 0.75;
+                element.style.opacity = 0.1; // Reduce opacity of CSS objects
                 element.style.backgroundColor = new THREE.Color(Math.random() * 0xffffff).getStyle();
 
                 const object = new CSS3DObject(element);
@@ -169,31 +153,30 @@
                 object.scale.y = Math.random() + 0.5;
                 pivot.add(object);
 
-                const geometry = new THREE.PlaneGeometry(100, 100);
-                const mesh = new THREE.Mesh(geometry, material);
+                const geometry = new THREE.BoxGeometry(100, 100, 10);
+                const edges = new THREE.EdgesGeometry(geometry);
+                const line = new THREE.LineSegments(edges, lineMaterial);
                 
-                // Offset the mesh slightly to create a shadow effect
-                const shadowOffset = new THREE.Vector3(5, -5, -2);
-                mesh.position.copy(object.position).add(shadowOffset);
-                mesh.rotation.copy(object.rotation);
-                mesh.scale.copy(object.scale);
-                pivot.add(mesh);
+                line.position.copy(object.position);
+                line.rotation.copy(object.rotation);
+                line.scale.copy(object.scale);
+                pivot.add(line);
             }
 
-            // WebGL renderer
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setSize(window.innerWidth, window.innerHeight);
-            document.body.appendChild(renderer.domElement);
+            document.getElementById('scene-container').appendChild(renderer.domElement);
 
-            // CSS3D renderer
             cssRenderer = new CSS3DRenderer();
             cssRenderer.setSize(window.innerWidth, window.innerHeight);
             cssRenderer.domElement.style.position = 'absolute';
             cssRenderer.domElement.style.top = 0;
-            document.body.appendChild(cssRenderer.domElement);
+            document.getElementById('scene-container').appendChild(cssRenderer.domElement);
 
             controls = new TrackballControls(camera, cssRenderer.domElement);
+            controls.noZoom = true; // Disable zooming
+            controls.noPan = true;  // Disable panning
 
             window.addEventListener('resize', onWindowResize);
         }
@@ -212,17 +195,16 @@
             renderer.render(scene, camera);
             cssRenderer.render(scene, camera);
         }
+        
         window.addEventListener('load', function() {
             const loadingScreen = document.getElementById('loading');
             loadingScreen.style.opacity = '0';
             loadingScreen.style.transition = 'opacity 0.5s ease';
         
-            // Espera a transição de fade-out terminar antes de remover o elemento do DOM
             setTimeout(function() {
                 loadingScreen.style.display = 'none';
-            }, 500); // Corresponde ao tempo da transição
+            }, 500);
         });
-        
     </script>
 </body>
 </html>
