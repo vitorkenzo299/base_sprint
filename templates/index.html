@@ -1,41 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SciConnect - UNINDO IDEIAS</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    
-    
 </head>
 <body>
+    <nav class="navbar">
+        <a href="#" class="navbar-logo"><span>Sci</span>Connect</a>
+        <div class="navbar-links">
+            <a href="#">SOBRE</a>
+            <a href="#projects">PROJETOS</a>
+            <a href="/signin">CADASTRE-SE</a>
+        </div>
+    </nav>
+
     <div id="loading">
         <div class="spinner"></div>
-        <p>Loading...</p>
+        <p>Loading SciConnect...</p>
     </div>
-    <div id="info">
+
+    <div class="info-box left">
         <h2>SOBRE NÓS</h2>
-        <p>SciConnect é um projeto que une alunos com vontade de realizar uma iniciação científica com professores capacitados. <br> Nossa missão é facilitar o encontro de mentes com especialistas que podem guiar novos caminhos na pesquisa científica.</p>
+        <p>SciConnect é um projeto que une alunos com vontade de realizar uma iniciação científica com professores capacitados. Nossa missão é facilitar o encontro de mentes com especialistas que podem guiar novos caminhos na pesquisa científica.</p>
     </div>
-    <div id="info-left">
-        <h2>UMA SÉRIE DE INOVAÇÕES PARA AJUDAR VOCÊ</h2>
-        <p>O SciConnect conta com um chatbot integrado, que possui capacidade de ajudar você com eventuais dúvidas sobre o processo de aplicação de uma iniciação científica.<br> Além disso, contamos com uma extensa base de dados que une seu tema de pesquisa com os professores mais capacitados da área.</p>
+
+    <div class="info-box right">
+        <h2>INOVAÇÕES PARA VOCÊ</h2>
+        <p>O SciConnect conta com um chatbot integrado, que possui capacidade de ajudar você com eventuais dúvidas sobre o processo de aplicação de uma iniciação científica. Além disso, contamos com uma extensa base de dados que une seu tema de pesquisa com os professores mais capacitados da área.</p>
     </div>
+
     <div id="scene-container"></div>
    
     <div id="content-wrapper">
-        
         <div id="scrollable-content">
-            <h2>NOSSOS PROJETOS</h2>
-            <p>BLA BLA BLA</p>
-            
-            <p>x</p>
-            <p>yas</p>
-           
+            <h2 id="projects" class="section-title">NOSSOS PROJETOS</h2>
+            <div class="photo-grid">
+                <div class="photo-item">
+                    <img src="/api/placeholder/280/200" alt="Project 1">
+                    <div class="photo-item-content">
+                        <h3>PROJETO 1</h3>
+                        <p>XXXXX</p>
+                    </div>
+                </div>
+                <div class="photo-item">
+                    <img src="/api/placeholder/280/200" alt="Project 2">
+                    <div class="photo-item-content">
+                        <h3>PROJETO 2</h3>
+                        <p>XXXXXX</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
+    <!-- The script section remains unchanged -->
     <script type="importmap">
         {
             "imports": {
