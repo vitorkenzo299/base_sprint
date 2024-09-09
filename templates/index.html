@@ -14,7 +14,7 @@
         <div class="navbar-links">
             <a href="#">SOBRE</a>
             <a href="#projects">PROJETOS</a>
-            <a href="/signin">CADASTRE-SE</a>
+            
         </div>
     </nav>
 
@@ -32,7 +32,9 @@
         <h2>INOVAÇÕES PARA VOCÊ</h2>
         <p>O SciConnect conta com um chatbot integrado, que possui capacidade de ajudar você com eventuais dúvidas sobre o processo de aplicação de uma iniciação científica. Além disso, contamos com uma extensa base de dados que une seu tema de pesquisa com os professores mais capacitados da área.</p>
     </div>
-
+    <div class="join">
+        <a href = "/login">ENTRE</a>
+    </div>
     <div id="scene-container"></div>
    
     <div id="content-wrapper">
@@ -57,7 +59,7 @@
         </div>
     </div>
     
-    <!-- The script section remains unchanged -->
+    
     <script type="importmap">
         {
             "imports": {
@@ -91,14 +93,14 @@
             const lineMaterial = new THREE.LineBasicMaterial({
                 color: 0xffffff,
                 transparent: true,
-                opacity: 0.5
+                opacity: 0.8
             });
 
             for (let i = 0; i < 15; i++) {
                 const element = document.createElement('div');
                 element.style.width = '100px';
                 element.style.height = '100px';
-                element.style.opacity = 0.1; // Reduce opacity of CSS objects
+                element.style.opacity = 0.2; // Reduce opacity of CSS objects
                 element.style.backgroundColor = new THREE.Color(Math.random() * 0xffffff).getStyle();
 
                 const object = new CSS3DObject(element);
