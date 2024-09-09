@@ -22,42 +22,20 @@
         <div class="spinner"></div>
         <p>Loading SciConnect...</p>
     </div>
-
-    <div class="info-box left">
-        <h2>SOBRE NÓS</h2>
-        <p>SciConnect é um projeto que une alunos com vontade de realizar uma iniciação científica com professores capacitados. Nossa missão é facilitar o encontro de mentes com especialistas que podem guiar novos caminhos na pesquisa científica.</p>
-    </div>
-
-    <div class="info-box right">
-        <h2>INOVAÇÕES PARA VOCÊ</h2>
-        <p>O SciConnect conta com um chatbot integrado, que possui capacidade de ajudar você com eventuais dúvidas sobre o processo de aplicação de uma iniciação científica. Além disso, contamos com uma extensa base de dados que une seu tema de pesquisa com os professores mais capacitados da área.</p>
-    </div>
-    <div class="join">
-        <a href = "/login">ENTRE</a>
+    <div class = "textos">
+        <div class="info-box-menor box">
+            <h2>SOBRE NÓS</h2>
+            <p>SciConnect é um projeto que une alunos com vontade de realizar uma iniciação científica com professores capacitados. Nossa missão é facilitar o encontro de mentes com especialistas que podem guiar novos caminhos na pesquisa científica.</p>
+        </div>
+    
+        <div class="info-box-maior box">
+            <h2>INOVAÇÕES PARA VOCÊ</h2>
+            <p>O SciConnect conta com um chatbot integrado, que possui capacidade de ajudar você com eventuais dúvidas sobre o processo de aplicação de uma iniciação científica. Além disso, contamos com uma extensa base de dados que une seu tema de pesquisa com os professores mais capacitados da área.</p>
+        </div>
     </div>
     <div id="scene-container"></div>
    
-    <div id="content-wrapper">
-        <div id="scrollable-content">
-            <h2 id="projects" class="section-title">NOSSOS PROJETOS</h2>
-            <div class="photo-grid">
-                <div class="photo-item">
-                    <img src="/api/placeholder/280/200" alt="Project 1">
-                    <div class="photo-item-content">
-                        <h3>PROJETO 1</h3>
-                        <p>XXXXX</p>
-                    </div>
-                </div>
-                <div class="photo-item">
-                    <img src="/api/placeholder/280/200" alt="Project 2">
-                    <div class="photo-item-content">
-                        <h3>PROJETO 2</h3>
-                        <p>XXXXXX</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     
     
     <script type="importmap">
@@ -96,7 +74,7 @@
                 opacity: 0.8
             });
 
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 17; i++) {
                 const element = document.createElement('div');
                 element.style.width = '100px';
                 element.style.height = '100px';
@@ -111,10 +89,10 @@
                 object.rotation.y = Math.random() * 2 * Math.PI;
                 object.rotation.z = Math.random() * 2 * Math.PI;
                 object.scale.x = Math.random() + 0.5;
-                object.scale.y = Math.random() + 0.5;
+                object.scale.y = Math.random() + 1;
                 pivot.add(object);
 
-                const geometry = new THREE.BoxGeometry(100, 100, 10);
+                const geometry = new THREE.BoxGeometry(10000, 0, 10);
                 const edges = new THREE.EdgesGeometry(geometry);
                 const line = new THREE.LineSegments(edges, lineMaterial);
                 
@@ -126,11 +104,11 @@
 
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(window.innerWidth*1.7, window.innerHeight);
             document.getElementById('scene-container').appendChild(renderer.domElement);
 
             cssRenderer = new CSS3DRenderer();
-            cssRenderer.setSize(window.innerWidth, window.innerHeight);
+            cssRenderer.setSize(window.innerWidth*0, window.innerHeight*0);
             cssRenderer.domElement.style.position = 'absolute';
             cssRenderer.domElement.style.top = 0;
             document.getElementById('scene-container').appendChild(cssRenderer.domElement);
@@ -152,7 +130,7 @@
         function animate() {
             requestAnimationFrame(animate);
             pivot.rotation.y += 0.005;
-            controls.update();
+            
             renderer.render(scene, camera);
             cssRenderer.render(scene, camera);
         }
